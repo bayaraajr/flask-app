@@ -7,8 +7,14 @@ WORKDIR /app
 # Copy the current directory contents into the container at /app
 ADD . /app
 
+COPY requirements.txt requirements.txt
+
+RUN pip3 install -r requirements.txt
+
+COPY . .
+
 # Make port 80 available to the world outside this container
 EXPOSE 5000
 
 # Run server.py when the container launches
-CMD ["flask", "-app main run"]
+CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]
